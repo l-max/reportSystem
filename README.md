@@ -47,7 +47,7 @@ var serviceBase = 'http://localhost/server/web/';
 ```
 МИГРАЦИИ
 ------------
-Для создания таблиц в базе данных необходимо выполнить миграции в Yii:
+Для создания таблиц в базе данных необходимо выполнить миграции Yii в командной строке:
 ```
 path/to/server/>php yii migrate
 ```
@@ -60,6 +60,7 @@ path/to/server/>php yii migrate
 Предположим что путь до сервера будет `http://localhost/server/web/`. 
 
 Тогда для работы с API сервером реализованы следующие запросы:
+```
 GET http://localhost/server/web/reports - получить все отчеты;
 HEAD http://localhost/server/web/reports - получить заголовок ответа на запрос GET http://localhost/server/web/reports;
 POST http://localhost/server/web/reports - создать новый отчет;
@@ -69,5 +70,5 @@ PATCH http://localhost/server/web/reports/123 и PUT http://localhost/server/web
 DELETE http://localhost/server/web/reports/123 - удалить отчет с id=123;
 OPTIONS http://localhost/server/web/reports - получить список доступных методов запроса для http://localhost/server/web/reports;
 OPTIONS http://localhost/server/web/reports/123 - получить список доступных методов запроса для http://localhost/server/web/reports/123.
-
+```
 Так же реализованы запросы для работы с ресурсом projects.
