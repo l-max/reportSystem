@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/report/index" title="Система учета рабочего времени"><i class="glyphicon glyphicon-th"></i> Report system</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/report/index"><i class="glyphicon glyphicon-list-alt"></i> Список отчетов</a></li>
+                <li><a href="#/site/about"><i class="glyphicon glyphicon-tag"></i> О приложении</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="main" class="container" style="margin-top:50px">
+        <!-- Content -->
+        <div ng-view></div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <footer class="text-center">
+        <p>Работает на Yii и AngularJs</p>
+    </footer>
+    <!-- JS libs -->
+    <script src="assets/angular-1.5.9/angular.min.js"></script>
+    <script src="assets/angular-1.5.9/angular-route.min.js"></script>
+    <script src="assets/ui-bootstrap/ui-bootstrap-custom-tpls-2.3.1.js"></script>
+    <!-- AngularJs modules -->
+    <script src="app.js"></script>
+    <script src="controllers/site.js"></script>
+    <script src="controllers/report.js"></script>
+    <script src="models/report.js"></script>
+    <script src="models/project.js"></script>
+</body>
+</html>

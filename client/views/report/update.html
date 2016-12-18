@@ -1,0 +1,50 @@
+<div>
+    <h1>Список отчетов: редактирование отчета</h1>
+
+    <p>{{ message}}</p>
+    <form role="form" name="myForm">
+        <div class= "form-group" ng-class="{error: myForm.title.$invalid}">
+            <label> Заголовок </label>
+            <div>
+                <input name="title" ng-model="report.title" type="text" class= "form-control" placeholder="Заголовок отчета" required/>
+                <span ng-show="myForm.title.$dirty && myForm.title.$invalid" class="help-inline">Название обязательно</span>
+            </div>
+        </div>
+        <div class= "form-group">
+            <label> Комментарии </label>
+            <div>
+                <textarea name="comments" ng-model="report.comments" class="form-control" placeholder="Комментарии"></textarea>
+            </div>
+        </div>
+        <div class= "form-group">
+            <label> Часы </label>
+            <div>
+                <input name="hours" ng-model="report.hours" type="text" class="form-control" placeholder="Часы">
+                <span ng-show="myForm.hours.$dirty && myForm.hours.$invalid" class="help-inline">Часы - обязательное поле</span>
+            </div>
+        </div>
+        <div class= "form-group" ng-class="{error: myForm.date.$invalid}">
+            <label> Дата </label>
+            <div>
+                <input name="date" ng-model="report.date" type="date" class="form-control" required/>
+                <span ng-show="myForm.date.$dirty && myForm.date.$invalid" class="help-inline">Дата обязательна</span>
+            </div>
+        </div>
+        <div class= "form-group" ng-class="{error: myForm.project_id.$invalid}">
+            <label> Проект </label>
+            <div>
+                <select
+                        name="project_id"
+                        ng-model="selectedItem"
+                        ng-options="project.name for project in projects track by project.id"
+                        class="form-control" required>
+                </select>
+                <span ng-show="myForm.project_id.$dirty && myForm.project_id.$invalid">Не указан проект!</span>
+            </div>
+        </div>
+        <a href="#/report/index" class="btn btn-default">Cancel</a>
+        <button ng-click="updateReport(report, selectedItem);"
+                ng-disabled="isClean() || myForm.$invalid"
+                type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

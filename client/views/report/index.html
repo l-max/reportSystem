@@ -1,0 +1,85 @@
+<div ng-controller="index" >
+    <h1>Список отчетов</h1>
+    <h2 ng-hide="reports" class="text-center">
+        <span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span> Загрузка...</h2>
+    <div ng-show="reports.length > 0">
+        <a class="btn btn-primary" href="#/report/create">
+            <i class="glyphicon glyphicon-plus"></i> Добавить
+        </a>
+        <div>найдено: {{totalItems}}</div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <th>#</th>
+            <th width="150">
+                <a href="" ng-click="sort('title')">
+                Заголовок
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('title'),
+                                                    'glyphicon-chevron-down' : isSortDown('title')}"></i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="sort('comments')">
+                    Комментарии
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('comments'),
+                                                    'glyphicon-chevron-down' : isSortDown('comments')}"></i>
+                </a>
+            </th>
+            <th width="90">
+                <a href="" ng-click="sort('hours')">
+                    Часы
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('hours'),
+                                                    'glyphicon-chevron-down' : isSortDown('hours')}"></i>
+                </a>
+            </th>
+            <th width="100">
+                <a href="" ng-click="sort('date')">
+                    Дата
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('date'),
+                                                    'glyphicon-chevron-down' : isSortDown('date')}"></i>
+                </a>
+            </th>
+            <th width="100">
+                <a href="" ng-click="sort('project_id')">
+                    Проект
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('project_id'),
+                                                    'glyphicon-chevron-down' : isSortDown('project_id')}"></i>
+                </a>
+            </th>
+            <th style="width:80px;">Действия </th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in reports"  ng-cloak>
+                <td>{{ $index + 1 + (currentPage - 1) * itemPerPage }}</td>
+                <td>{{ data.title }}</td>
+                <td>{{ data.comments }}</td>
+                <td>{{ data.hours }}</td>
+                <td>{{ data.date }}</td>
+                <td>{{ projects[data.project_id] }}</td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="#/report/update/{{data.id}}">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs" ng-click="deleteReport(data.id)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div></div>
+        <ul
+                uib-pagination
+                ng-model="currentPage"
+                items-per-page="itemPerPage"
+                total-items="totalItems"
+                max-size="maxSize"
+                class="pagination-sm"
+                boundary-links="true"
+                ng-change="pageChanged()"
+                rotate="true">
+        </ul>
+    </div>
+    <div ng-show="reports.length == 0">
+        В системе отсутствуют отчеты
+    </div>
+</div>
