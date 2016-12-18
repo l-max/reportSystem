@@ -3,36 +3,24 @@
 
 Система реализована на Yii2 RESTfull API в связке с AngularJs.
 
-DIRECTORY STRUCTURE
+СТРУКТУРА КАТАЛОГОВ
 -------------------
 
       client/             содержит клиентскую часть приложения (AngularJs)
       server/             содержит серверную часть приложения (Yii2 RESTful API)
 
 
-REQUIREMENTS
+ТРЕБОВАНИЯ
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0 and MySQL or 10.1.19-MariaDB.
+Минимальные требования: PHP 5.4.0 и MySQL 5.7 или 10.1.19-MariaDB.
 
-
-INSTALLATION
-------------
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/server/web/
-~~~
-
-
-CONFIGURATION
+НАСТРОЙКА
 -------------
 
-### Database
+### БАЗЫ ДАННЫХ
 
-Edit the file `config/db.php` with real data, for example:
+Для настройки необходимо изменить файл `server/config/db.php` подставив свои данные, для примера:
 
 ```php
 return [
@@ -44,14 +32,12 @@ return [
 ];
 ```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+**ПРИМЕЧАНИЕ:**
+- Передварительно нужно убедиться что база данных с таким именем существует иначе создать новую.
 
-### Client config
+### НАСТРОЙКА КЛИЕНТСКОЙ ЧАСТИ
 
-Edit the file `client/app.js` with real data, for example:
+Для настройки отредактируйте файл `client/app.js` изменив адрес http://localhost/server/web/ на адрес до вашего API сервера, к примеру:
 
 ```
 'use strict';
@@ -59,9 +45,29 @@ Edit the file `client/app.js` with real data, for example:
 var serviceBase = 'http://localhost/server/web/';
 ...
 ```
-Миграции
+МИГРАЦИИ
 ------------
-Для создания таблиц в бд необходимо выполнить миграции в Yii:
+Для создания таблиц в базе данных необходимо выполнить миграции в Yii:
 ```
 path/to/server/>php yii migrate
 ```
+ЗАПУСК ПРИЛОЖЕНИЯ
+-----------------
+Запуск приложения осуществляется открытием в браузере файла `/client/index.html`. В случае когда домменое имя `localhost` доступ к приложению будет: `http://localhost/client/`.
+
+РАБОТА С API СЕРВЕРОМ
+---------------------
+Предположим что путь до сервера будет `http://localhost/server/web/`. 
+
+Тогда для работы с API сервером реализованы следующие запросы:
+GET http://localhost/server/web/reports - получить все отчеты;
+HEAD http://localhost/server/web/reports - получить заголовок ответа на запрос GET http://localhost/server/web/reports;
+POST http://localhost/server/web/reports - создать новый отчет;
+GET http://localhost/server/web/reports/123 - получить данные отчета с id=123;
+HEAD http://localhost/server/web/reports/123 - получить заголовок ответа GET http://localhost/server/web/reports/123;
+PATCH http://localhost/server/web/reports/123 и PUT http://localhost/server/web/reports/123 - изменить данные отчета с id=123;
+DELETE http://localhost/server/web/reports/123 - удалить отчет с id=123;
+OPTIONS http://localhost/server/web/reports - получить список доступных методов запроса для http://localhost/server/web/reports;
+OPTIONS http://localhost/server/web/reports/123 - получить список доступных методов запроса для http://localhost/server/web/reports/123.
+
+Так же реализованы запросы для работы с ресурсом projects.
