@@ -3,11 +3,14 @@
 use yii\db\Migration;
 
 /**
- * Class m161218_083046_create_projects_table.
- * Миграция для создания таблицы проектов.
+ * Class m170101_000000_create_task_type_table.
+ * Миграция для создания таблицы типов проекта.
  */
-class m161218_083046_create_projects_table extends Migration
+class m170101_000000_create_task_type_table extends Migration
 {
+
+    protected $tableName = '{{%task_type}}';
+
     /**
      * @inheritdoc
      */
@@ -18,16 +21,19 @@ class m161218_083046_create_projects_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%projects}}', [
+        $this->createTable($this->tableName, [
             'id'   => $this->primaryKey(),
             'name' => $this->string(255),
         ], $tableOptions);
 
-        $this->insert('{{%projects}}', [
-            'name' => 'Система учёта рабочего времени',
+        $this->insert($this->tableName, [
+            'name' => 'Task',
         ]);
-        $this->insert('{{%projects}}', [
-            'name' => 'Корпоративный портал',
+        $this->insert($this->tableName, [
+            'name' => 'Bug',
+        ]);
+        $this->insert($this->tableName, [
+            'name' => 'New Feature',
         ]);
 
     }
@@ -37,6 +43,6 @@ class m161218_083046_create_projects_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%projects}}');
+        $this->dropTable($this->tableName);
     }
 }
