@@ -1,16 +1,14 @@
 <?php
 
 use yii\db\Migration;
+use app\models\User;
 
 /**
- * Class m170101_000000_create_task_type_table.
- * Миграция для создания таблицы типов проекта.
+ * Class m170101_000001_create_user_table.
+ * Миграция для создания таблицы user.
  */
-class m170101_000000_create_task_type_table extends Migration
+class m170101_000001_create_user_table extends Migration
 {
-
-    protected $tableName = '{{%task_type}}';
-
     /**
      * @inheritdoc
      */
@@ -21,21 +19,24 @@ class m170101_000000_create_task_type_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable($this->tableName, [
-            'id'   => $this->primaryKey(),
-            'name' => $this->string(255),
+        $this->createTable('{{%user}}', [
+            'id' => $this->primaryKey(),
+            'username' => $this->string()->notNull()->unique(),
+            'auth_key' => $this->string(32)->notNull(),
+            'password_hash' => $this->string()->notNull(),
+            'password_reset_token' => $this->string()->unique(),
+            'email' => $this->string()->notNull()->unique(),
+            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->insert($this->tableName, [
-            'name' => 'Task',
-        ]);
-        $this->insert($this->tableName, [
-            'name' => 'Bug',
-        ]);
-        $this->insert($this->tableName, [
-            'name' => 'New Feature',
-        ]);
-
+        $user = new User();
+        $user->username = 'demo';
+        $user->email = 'demo@example.com';
+        $user->generateAuthKey();
+        $user->setPassword('demo');
+        $user->save(false);
     }
 
     /**
@@ -43,6 +44,6 @@ class m170101_000000_create_task_type_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable($this->tableName);
+        $this->dropTable('{{%user}}');
     }
 }

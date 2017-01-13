@@ -3,9 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\auth\HttpBasicAuth;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
 use app\models\Reports;
 use yii\filters\Cors;
 
@@ -25,6 +28,16 @@ class ReportsController extends ActiveController
             ArrayHelper::merge(parent::behaviors(), [
                 'corsFilter' => [
                     'class' => Cors::className(),
+                ],
+                'authenticator' => [
+                    'class' => HttpBasicAuth::className(),
+                    'auth' => function ($username, $password) {
+                            $user = \app\models\User::findOne(['username' => $username]);
+                        return (Yii::$app->getSecurity()->validatePassword($password, $user->password_hash)) ? $user : null;
+//                        if ($user->validatePassword($password))
+//                                return $user;
+//                            return null;
+                        },
                 ],
             ]);
     }
