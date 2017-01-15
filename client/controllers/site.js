@@ -1,18 +1,5 @@
 'use strict';
-App_site.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/site/about', {
-            templateUrl: 'views/site/about.html',
-            controller: 'about'
-        })
-        .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginController'
-        })
-        .otherwise({
-            redirectTo: '/site/about'
-        });
-}])
+App_site
     .controller('about', ['$scope', '$http', function($scope, $http) {
         $scope.message = 'Это страница с информацией о приложении.';
     }])

@@ -15,6 +15,45 @@ var App_report  = angular.module('App.report', ['ngRoute', 'ui.bootstrap']);
 var App_project = angular.module('App.project', ['ngRoute']);
 
 App.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+    $routeProvider
+        .when('/site/about', {
+            templateUrl: 'views/site/about.html',
+            controller: 'about'
+        })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginController'
+        })
+        .when('/report/index', {
+            templateUrl: 'views/report/index.html',
+            controller: 'index'
+        })
+        .when('/report/create', {
+            templateUrl: 'views/report/create.html',
+            controller: 'create',
+            resolve: {
+                report: function(reportService, $route) {
+                    return reportService.getReports();
+                }
+            }
+        })
+        .when('/report/update/:reportId', {
+            templateUrl: 'views/report/update.html',
+            controller: 'update',
+            resolve: {
+                report: function(reportService, $route) {
+                    var reportId = $route.current.params.reportId;
+                    return reportService.getReport(reportId);
+                }
+            }
+        })
+        .when('/report/delete/:reportId', {
+            templateUrl: 'views/report/index.html',
+            controller: 'delete'
+        })
+        .otherwise({
+            redirectTo: '/site/about'
+        });
     $httpProvider.interceptors.push('authInterceptor');
 }]);
 

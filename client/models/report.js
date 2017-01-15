@@ -1,5 +1,5 @@
 'use strict';
-App_report.factory("reportService", ['$http', '$location', '$route', 'projectService',
+App_report.factory("reportService", ['$http', '$location', '$route',
     function($http, $location, $route) {
         var obj = {};
         obj.getReports = function(page, field, direction) {
@@ -10,11 +10,11 @@ App_report.factory("reportService", ['$http', '$location', '$route', 'projectSer
                 .then(successHandler)
                 .catch(errorHandler);
             function successHandler(result) {
-                $location.path('/reports/index');
+                $location.path('/report/index').replace();
             }
             function errorHandler(result){
                 alert("Error data");
-                $location.path('/reports/create')
+                $location.path('/report/create')
             }
         };
         obj.getReport = function(reportId){
@@ -26,11 +26,11 @@ App_report.factory("reportService", ['$http', '$location', '$route', 'projectSer
                 .then(successHandler)
                 .catch(errorHandler);
             function successHandler(result) {
-                $location.path('/reports/index');
+                $location.path('/report/index');
             }
             function errorHandler(result) {
                 alert("Error data");
-                $location.path('/reports/update/' + report.id)
+                $location.path('/report/update/' + report.id)
             }
         };
         obj.deleteReport = function (reportId) {
