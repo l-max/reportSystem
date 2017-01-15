@@ -7,18 +7,15 @@ use yii\rest\Controller;
 use app\models\LoginForm;
 use yii\filters\Cors;
 use yii\helpers\ArrayHelper;
-use yii\filters\auth\HttpBearerAuth;
 
 /**
- * Class ApiController
- * Контроллер для основных действий api.
+ * Class UserController
+ * Контроллер для авторизации пользователя.
  *
  * @package app\controllers
  */
-class ApiController extends Controller
+class UserController extends Controller
 {
-    public $modelClass = 'app\models\Projects';
-
     public function behaviors()
     {
         return
@@ -26,16 +23,8 @@ class ApiController extends Controller
                 'corsFilter' => [
                     'class' => Cors::className(),
                 ],
-                'authenticator' => [
-                    'class' => HttpBearerAuth::className(),
-                    /*'auth' => function ($username, $password) {
-                        $user = User::findOne(['username' => $username]);
-                        return ($user->validatePassword($password)) ? $user : null;
-                        },*/
-                ],
             ]);
     }
-
 
     /**
      * Действие входа в систему.

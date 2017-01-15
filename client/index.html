@@ -7,15 +7,21 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
+<body ng-controller="MainController">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#/report/index" title="Система учета рабочего времени"><i class="glyphicon glyphicon-th"></i> Report system</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/report/index"><i class="glyphicon glyphicon-list-alt"></i> Список отчетов</a></li>
+                <li ng-show="loggedIn()"><a href="#/report/index"><i class="glyphicon glyphicon-list-alt"></i> Список отчетов</a></li>
                 <li><a href="#/site/about"><i class="glyphicon glyphicon-tag"></i> О приложении</a></li>
+                <li ng-class="{active:isActive('/logout')}" ng-show="loggedIn()" ng-click="logout()"  class="ng-hide">
+                    <a href="">Logout</a>
+                </li>
+                <li ng-hide="loggedIn()">
+                    <a href="#/login">Login</a>
+                </li>
             </ul>
         </div>
     </nav>

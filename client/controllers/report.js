@@ -30,9 +30,6 @@ App_report.config(['$routeProvider', function($routeProvider) {
         .when('/report/delete/:reportId', {
             templateUrl: 'views/report/index.html',
             controller: 'delete'
-        })
-        .otherwise({
-            redirectTo: '/report/index'
         });
 }])
 
