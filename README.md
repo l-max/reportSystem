@@ -13,7 +13,19 @@
 ТРЕБОВАНИЯ
 ------------
 
-Минимальные требования: PHP 5.4.0 и MySQL 5.7 или 10.1.19-MariaDB.
+Минимальные требования: PHP 5.4.0, MySQL
+
+УСТАНОВКА
+----------
+
+### Установка с помощью Composer
+~~~
+git clone https://github.com/lapmax/reportSystem.git
+composer self-update
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+cd reportSystem/server
+composer install
+~~~
 
 НАСТРОЙКА
 -------------
