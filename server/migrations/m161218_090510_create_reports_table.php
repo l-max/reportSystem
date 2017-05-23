@@ -26,6 +26,7 @@ class m161218_090510_create_reports_table extends Migration
             'date'       => $this->date()->notNull(),
             'project_id' => $this->integer()->notNull(),
             'hours'      => $this->double()->notNull(),
+            'user_id'    => $this->integer()->notNull(),
         ], $tableOptions);
 
         // creates index for column `project_id`
@@ -44,6 +45,18 @@ class m161218_090510_create_reports_table extends Migration
             'id',
             'CASCADE'
         );
+		
+		// add foreign key for table `users`
+        $this->addForeignKey(
+            'fk-reports-user_id',
+            'reports',
+            'user_id',
+            'users',
+            'id',
+            'CASCADE'
+        );
+		
+		//TODO: ADD FOREIGN KEY FOR USER_ID
         $this->insert('{{%reports}}', [
             'title'      => 'Реализовать систему учёта рабочего времени',
             'comments'   => 'Система учёта рабочего времени реализована как тестовое задание. В процессе создания приложения были
@@ -51,6 +64,7 @@ class m161218_090510_create_reports_table extends Migration
             'date'       => '2016-12-14',
             'project_id' => 1,
             'hours'      => '6',
+            'user_id'    => 1;
         ]);
         $this->insert('{{%reports}}', [
             'title'      => 'Реализовать систему учёта рабочего времени',
@@ -58,6 +72,7 @@ class m161218_090510_create_reports_table extends Migration
             'date'       => '2016-12-15',
             'project_id' => 1,
             'hours'      => '5',
+            'user_id'    => 1;
         ]);
         $this->insert('{{%reports}}', [
             'title'      => 'Реализовать систему учёта рабочего времени',
@@ -65,6 +80,7 @@ class m161218_090510_create_reports_table extends Migration
             'date'       => '2016-12-16',
             'project_id' => 1,
             'hours'      => '5',
+            'user_id'    => 1;
         ]);
     }
 
@@ -82,6 +98,12 @@ class m161218_090510_create_reports_table extends Migration
         // drops index for column `project_id`
         $this->dropIndex(
             'idx-reports-project_id',
+            'reports'
+        );
+		
+		// drops foreign key for table `users`
+        $this->dropForeignKey(
+            'fk-reports-user_id',
             'reports'
         );
         $this->dropTable('{{%reports}}');

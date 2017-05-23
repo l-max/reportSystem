@@ -6,7 +6,7 @@ App_report.factory("reportService", ['$http', '$location', '$route',
             return $http.get(serviceBase + 'reports?page=' + page + '&orderBy=' + field + ' ' + direction);
         };
         obj.createReport = function (report) {
-            return $http.post( serviceBase + 'reports', report)
+            return $http.post(serviceBase + 'reports', report)
                 .then(successHandler)
                 .catch(errorHandler);
             function successHandler(result) {
@@ -17,7 +17,7 @@ App_report.factory("reportService", ['$http', '$location', '$route',
                 $location.path('/report/create')
             }
         };
-        obj.getReport = function(reportId){
+        obj.getReport = function(reportId) {
             return $http.get(serviceBase + 'reports/' + reportId);
         };
 

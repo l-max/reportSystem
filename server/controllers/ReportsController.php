@@ -63,7 +63,6 @@ class ReportsController extends ActiveController
                 ],
             ]);
         }
-
     }
 
     /**

@@ -29,7 +29,8 @@ class ProjectsController extends ActiveController
             ]);
     }
 
-    public function actions(){
+    public function actions()
+    {
         $actions = parent::actions();
         unset($actions['index']);
         return $actions;

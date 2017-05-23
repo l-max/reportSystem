@@ -1,6 +1,6 @@
 'use strict';
 // Ссылка на серверную часть приложения
-var serviceBase = 'http://192.168.0.57/server/web/';
+var serviceBase = 'http://localhost:8085/server/web/';
 // Основной модуль приложения и его компоненты
 var App = angular.module('App', [
     'ngRoute',

@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $date
  * @property integer $project_id
  * @property integer $hours
+ * @property integer $user_id
  */
 class Reports extends ActiveRecord
 {
@@ -40,7 +41,8 @@ class Reports extends ActiveRecord
                     'comments',
                     'date',
                     'project_id',
-                    'hours'
+                    'hours',
+                    'user_id'
                 ],
                 'required'
             ],
@@ -61,7 +63,10 @@ class Reports extends ActiveRecord
                 'safe'
             ],
             [
-                ['project_id'],
+                [
+					'project_id',
+                    'user_id'
+                ],
                 'integer'
             ],
             [
@@ -90,6 +95,7 @@ class Reports extends ActiveRecord
             'date'       => 'Date',
             'project_id' => 'Project ID',
             'hours'      => 'Hours',
+            'user_id'    => 'User ID',
         ];
     }
 
@@ -108,6 +114,7 @@ class Reports extends ActiveRecord
             'date'       => 'date',
             'project_id' => 'project_id',
             'hours'      => 'hours',
+            'user_id'    => 'user_id',
         ];
     }
 }
